@@ -37,7 +37,7 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
-      component: path.resolve(`./src/templates/blog-post.js`),
+      component: path.resolve(`./src/templates/panda-post.js`),
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
@@ -49,7 +49,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 
 
-    // `getPokemonData` is a function that fetches our data
+  // `getPokemonData` is a function that fetches our data
   //  const allPokemon = await getPokemonData(["pikachu", "charizard", "squirtle"])
   const allPokemon = ['pikachu', 'charizard', 'squirtle'].map(p => ({
     name: p,

@@ -21,6 +21,9 @@ const Image = () => (
           relativePath: { eq: "images/gatsby-astronaut.png" }
         ) {
           childImageSharp {
+            fixed(width: 125, height: 125) {
+              ...GatsbyImageSharpFixed
+            }
             fluid(maxWidth: 300) {
               ...GatsbyImageSharpFluid
             }
@@ -29,8 +32,13 @@ const Image = () => (
       }
     `}
     render={data => {
-      return <Img fluid={data.placeholderImage.childImageSharp.fluid} />
-    }}
+      return (
+        <React.Fragment>
+          <Img fixed={data.placeholderImage.childImageSharp.fixed} />
+          <Img fluid={data.placeholderImage.childImageSharp.fluid} />
+
+        </React.Fragment>
+      )    }}
   />
 )
 export default Image

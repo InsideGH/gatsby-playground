@@ -1,8 +1,17 @@
-import React from "react";
+import React from 'react'
+import Layout from '../components/layout'
+import SEO from '../components/seo'
 
 export default ({ pageContext: { pokemon } }) => {
-  return (<div style={{ width: 960, margin: "4rem auto" }}>
-    <h1>NAME : {pokemon.name}</h1>
-  </div>
+  return (
+    <Layout>
+      <SEO title={pokemon.name} />
+      <h1>Pokemon details : {pokemon.name}</h1>
+      <p>
+        Data to this component comes from 'gatsby-node.js' which also mounts
+        this component to the specific path.
+      </p>
+      <p>In gastby-node.js the pages are created with 'createPage'.</p>
+    </Layout>
   )
 }

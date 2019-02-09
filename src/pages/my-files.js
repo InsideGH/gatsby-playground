@@ -1,13 +1,18 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
+import SEO from '../components/seo'
 
 export default ({ data }) => {
-  console.log(data)
   return (
     <Layout>
+      <SEO title="My files" />
       <div>
-        <h1>My Site's Files</h1>
+        <p>
+          Thanks to the 'gatsby-source-filesystem' it's possible to query the
+          file system.
+        </p>
+        <h1>My Site's src folder files</h1>
         <table>
           <thead>
             <tr>
