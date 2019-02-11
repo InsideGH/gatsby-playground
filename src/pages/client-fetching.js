@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { useState, useEffect } from 'react'
 import { graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import axios from 'axios'
@@ -6,13 +6,16 @@ import axios from 'axios'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
-const ExchangeRates = () => (
+// Example of using Apollo Query to fetch data and render component.
+const AllCharacters = () => (
   <Query
     query={gql`
       {
-        rates(currency: "USD") {
-          currency
-          rate
+        characters {
+          results {
+            id
+            name
+          }
         }
       }
     `}
@@ -20,118 +23,128 @@ const ExchangeRates = () => (
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>
       if (error) return <p>Error :(</p>
-
-      return data.rates.map(({ currency, rate }) => (
-        <div key={currency}>
-          <p>
-            {currency}: {rate}
-          </p>
+      return data.characters.results.map(({ id, name }) => (
+        <div key={id}>
+          <h6>{name}</h6>
         </div>
       ))
     }}
   </Query>
 )
 
-class ClientFetchingExample extends PureComponent {
-  state = {
-    loading: false,
-    error: false,
-    pupper: {
-      img: '',
-      breed: '',
-    },
-  }
+// Example React custom hook to fetch data.
+function fetchPupper() {
+  let isCancelled = false
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [pupper, setPupper] = useState({
+    img: '',
+    breed: '',
+  })
 
-  componentDidMount() {
-    this.fetchRicksPupper()
-  }
+  const fetchPupper = async () => {
+    setLoading(true)
 
-  fetchRicksPupper = () => {
-    this.setState({ loading: true })
-    axios
-      .get(`https://dog.ceo/api/breeds/image/random`)
-      .then(pupper => {
-        const {
-          data: { message: img },
-        } = pupper
+    try {
+      const {
+        data: { message: img },
+      } = await axios.get(`https://dog.ceo/api/breeds/image/random`)
 
-        const breed = img.split('/')[4]
-
-        this.setState({
-          loading: false,
-          pupper: {
-            ...this.state.pupper,
-            img,
-            breed,
-          },
+      const breed = img.split('/')[4]
+      if (!isCancelled) {
+        setLoading(false)
+        setPupper({
+          img,
+          breed,
         })
-      })
-      .catch(error => {
-        this.setState({ loading: false, error })
-      })
+      }
+    } catch (error) {
+      if (!isCancelled) {
+        setError(error)
+        setLoading(false)
+      }
+    }
   }
 
-  render() {
-    const {
-      rickAndMorty: { character },
-    } = this.props.data
+  useEffect(() => {
+    fetchPupper()
+    return () => {
+      isCancelled = true
+    }
+  }, [])
 
-    const { img, breed } = this.state.pupper
-
-    return (
-      <div>
-        <h1>{character.name} With His Pupper</h1>
-        <p>Rick & Morty API data loads at build time.</p>
-        <p>
-          Using the {"'gatsby-source-graphql'"} to fetch graphql from{' '}
-          {'https://rickandmortyapi-gql.now.sh/'} at build time.
-        </p>
-        <div>
-          <img
-            src={character.image}
-            alt={character.name}
-            style={{ width: 300 }}
-          />
-        </div>
-
-        <h2>Image of {"Rick's"} pupper</h2>
-        <p>This will come from a request on the client using {"'axios'"}</p>
-        <div>
-          {this.state.loading ? (
-            <p>Please hold, pupper incoming!</p>
-          ) : img && breed ? (
-            <>
-              <h2>{`${breed} pupper!`}</h2>
-              <img src={img} alt={`cute random `} style={{ maxWidth: 300 }} />
-            </>
-          ) : (
-            <p>Oh noes, error fetching pupper :(</p>
-          )}
-        </div>
-        <div>
-          <h2>Request exchange rates using Apollo.</h2>
-          <p>
-            The exchange rates below are dynamically requested using
-            apollo-boost/ApolloProvider/react-apollo.
-          </p>
-          <ExchangeRates />
-        </div>
-      </div>
-    )
-  }
-  static propTypes = {
-    data: PropTypes.shape({
-      rickAndMorty: PropTypes.shape({
-        character: PropTypes.shape({
-          image: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
-        }).isRequired,
-      }),
-    }),
+  return {
+    loading,
+    pupper,
+    error,
   }
 }
 
-export default ClientFetchingExample
+// The component.
+export default function ClientFetchingExample({ data }) {
+  // Data from gatsby graphql at build time
+  const {
+    rickAndMorty: { character },
+  } = data
+
+  // Data fetched dynamically using a custom React hook.
+  const { loading, pupper, error } = fetchPupper()
+  const { img, breed } = pupper
+
+  return (
+    <div>
+      <h1>{character.name} with his Pupper</h1>
+      <p>Rick & Morty API data loads at build time.</p>
+      <p>
+        Using the {"'gatsby-source-graphql'"} to fetch graphql from{' '}
+        {'https://rickandmortyapi-gql.now.sh/'} at build time.
+      </p>
+      <div>
+        <img
+          src={character.image}
+          alt={character.name}
+          style={{ width: 300 }}
+        />
+      </div>
+
+      <h2>Image of {"Rick's"} pupper</h2>
+      <p>This will come from a request on the client using {"'axios'"}</p>
+      <div>
+        {loading ? (
+          <p>Please hold, pupper incoming!</p>
+        ) : img && breed ? (
+          <>
+            <p>{`${breed} pupper!`}</p>
+            <img src={img} alt={`cute random `} style={{ maxWidth: 300 }} />
+          </>
+        ) : (
+          <React.Fragment>
+            <p>Oh noes, error fetching pupper</p>
+            <p>{error}</p>
+          </React.Fragment>
+        )}
+      </div>
+      <div>
+        <h2>Request all characters using Apollo.</h2>
+        <p>
+          Dynamically requested using apollo-boost/ApolloProvider/react-apollo.
+        </p>
+        <AllCharacters />
+      </div>
+    </div>
+  )
+}
+
+ClientFetchingExample.propTypes = {
+  data: PropTypes.shape({
+    rickAndMorty: PropTypes.shape({
+      character: PropTypes.shape({
+        image: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      }).isRequired,
+    }),
+  }),
+}
 
 // This query is executed at build time by Gatsby.
 export const GatsbyQuery = graphql`
