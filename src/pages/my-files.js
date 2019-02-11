@@ -2,17 +2,18 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
+import PropTypes from 'prop-types'
 
-export default ({ data }) => {
+export default function MyFiles({ data }) {
   return (
     <Layout>
       <SEO title="My files" />
       <div>
         <p>
-          Thanks to the 'gatsby-source-filesystem' it's possible to query the
-          file system.
+          Thanks to the {"'gatsby-source-filesystem'"} {"it's"} possible to
+          query the file system.
         </p>
-        <h1>My Site's src folder files</h1>
+        <h1>My {"Site's"} src folder files</h1>
         <table>
           <thead>
             <tr>
@@ -36,6 +37,10 @@ export default ({ data }) => {
       </div>
     </Layout>
   )
+}
+
+MyFiles.propTypes = {
+  data: PropTypes.object.isRequired,
 }
 
 export const query = graphql`

@@ -1,8 +1,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
+import PropTypes from 'prop-types'
 
-export default ({ data }) => {
+export default function PandaPost({ data }) {
   const post = data.markdownRemark
   return (
     <Layout>
@@ -12,6 +13,10 @@ export default ({ data }) => {
       </div>
     </Layout>
   )
+}
+
+PandaPost.propTypes = {
+  data: PropTypes.object.isRequired,
 }
 
 export const query = graphql`

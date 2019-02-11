@@ -8,13 +8,16 @@ import SEO from '../components/seo'
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <p>The SEO component uses 'Helmet' to set meta tags, title and keywords.</p>
     <p>
-      Since this component is under src/pages, gastby creates a route for it.
-      The default plugin 'gatsby-plugin-page-creator' helps with this.
+      The SEO component uses {"'Helmet'"} to set meta tags, title and keywords.
     </p>
     <p>
-      'gatsby-plugin-typography' is used to setup a consistent typography theme.
+      Since this component is under src/pages, gastby creates a route for it.
+      The default plugin {"'gatsby-plugin-page-creator'"} helps with this.
+    </p>
+    <p>
+      {"'gatsby-plugin-typography'"} is used to setup a consistent typography
+      theme.
     </p>
     <div>
       <h1>H1 header.</h1>
@@ -28,7 +31,7 @@ const IndexPage = () => (
     <h2>Gatsby image</h2>
     <p>
       Automatically serve optimized images with lazy loading and reduced file
-      sizes. Uses the 'gatsby-transformer-sharp' and 'gatsby-plugin-sharp'.
+      sizes. Uses the {"'gatsby-transformer-sharp' and 'gatsby-plugin-sharp'"}.
     </p>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />

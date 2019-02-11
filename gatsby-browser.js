@@ -6,6 +6,7 @@
 
 import './src/styles/global.css'
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export const onClientEntry = () => {
   console.log("We've started!")
@@ -42,7 +43,7 @@ export const onRouteUpdateDelayed = () => {
   )
 }
 
-export const wrapRootElement = ({ element }) => {
+const wrapRootElement = ({ element }) => {
   return (
     <div style={{ padding: 0, margin: 0 }}>
       <p style={{ padding: 0, margin: 0 }}>
@@ -52,4 +53,8 @@ export const wrapRootElement = ({ element }) => {
       {element}
     </div>
   )
+}
+
+wrapRootElement.propTypes = {
+  element: PropTypes.object.isRequired,
 }
