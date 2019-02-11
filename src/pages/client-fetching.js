@@ -3,6 +3,35 @@ import { graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const ExchangeRates = () => (
+  <Query
+    query={gql`
+      {
+        rates(currency: "USD") {
+          currency
+          rate
+        }
+      }
+    `}
+  >
+    {({ loading, error, data }) => {
+      if (loading) return <p>Loading...</p>
+      if (error) return <p>Error :(</p>
+
+      return data.rates.map(({ currency, rate }) => (
+        <div key={currency}>
+          <p>
+            {currency}: {rate}
+          </p>
+        </div>
+      ))
+    }}
+  </Query>
+)
+
 class ClientFetchingExample extends PureComponent {
   state = {
     loading: false,
@@ -78,6 +107,14 @@ class ClientFetchingExample extends PureComponent {
           ) : (
             <p>Oh noes, error fetching pupper :(</p>
           )}
+        </div>
+        <div>
+          <h2>Request exchange rates using Apollo.</h2>
+          <p>
+            The exchange rates below are dynamically requested using
+            apollo-boost/ApolloProvider/react-apollo.
+          </p>
+          <ExchangeRates />
         </div>
       </div>
     )

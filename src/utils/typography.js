@@ -1,7 +1,8 @@
 import Typography from "typography"
-// import grandViewTheme from "typography-theme-grand-view"
-import judah from "typography-theme-judah"
+// import theme from "typography-theme-grand-view"
+// import theme from "typography-theme-judah"
+import theme from "typography-theme-moraga"
 
-const typography = new Typography(judah)
+const typography = new Typography(theme)
 
 export default typography

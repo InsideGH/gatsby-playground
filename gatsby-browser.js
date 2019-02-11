@@ -7,6 +7,8 @@
 import './src/styles/global.css'
 import React from 'react'
 import PropTypes from 'prop-types'
+import { client } from './src/apollo/client'
+import { ApolloProvider } from 'react-apollo'
 
 export const onClientEntry = () => {
   console.log("We've started!")
@@ -43,15 +45,18 @@ export const onRouteUpdateDelayed = () => {
   )
 }
 
-const wrapRootElement = ({ element }) => {
+export const wrapRootElement = ({ element }) => {
   return (
-    <div style={{ padding: 0, margin: 0 }}>
-      <p style={{ padding: 0, margin: 0 }}>
-        This is a root component and it is wrapped. Useful to supply provider
-        such as redux, apollo etc.
-      </p>
-      {element}
-    </div>
+    <ApolloProvider client={client}>
+      <div style={{ padding: 0, margin: 0 }}>
+        <p style={{ padding: 0, margin: 0, border: '5px solid #d61111' }}>
+          This (bws) is a root component and it is wrapped. Useful to supply
+          providers such as redux etc. This one wrapps with ApolloProvider for
+          client side dynamic fetching.
+        </p>
+        {element}
+      </div>
+    </ApolloProvider>
   )
 }
 

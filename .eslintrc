@@ -22,5 +22,10 @@
         "args": "after-used"
       }
     ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

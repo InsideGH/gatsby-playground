@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "apollo-boost": "^0.1.27",
     "axios": "^0.18.0",
     "gatsby": "^2.0.116",
     "gatsby-image": "^2.0.29",
@@ -17,14 +18,17 @@
     "gatsby-source-graphql": "^2.0.10",
     "gatsby-transformer-remark": "^2.2.4",
     "gatsby-transformer-sharp": "^2.1.13",
+    "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.6.2",
     "react": "^16.8.0",
+    "react-apollo": "^2.4.1",
     "react-dom": "^16.8.0",
     "react-helmet": "^5.2.0",
     "react-typography": "^0.16.18",
     "typography": "^0.16.18",
     "typography-theme-grand-view": "^0.16.18",
-    "typography-theme-judah": "^0.16.18"
+    "typography-theme-judah": "^0.16.18",
+    "typography-theme-moraga": "^0.16.18"
   },
   "keywords": [
     "gatsby"
