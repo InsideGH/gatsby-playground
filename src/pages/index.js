@@ -19,6 +19,19 @@ const IndexPage = () => (
       {"'gatsby-plugin-typography'"} is used to setup a consistent typography
       theme.
     </p>
+    <p>
+      When scrolling this page down to the links at the bottom of this page{' '}
+      {'<Link rel="prefech".../>'} are inserted in the {'<head>'}
+    </p>
+    <p>
+      When the links at the end of this page are hovered, the javascript, css
+      and json-data is fetched so that everything is ready (or partially) when
+      clicking the link.
+    </p>
+    <p>
+      The {'gatsby-browser.js'} has a lot of hooks available to be used. Check
+      the console for logs.
+    </p>
     <div>
       <h1>H1 header.</h1>
       <h2>H2 header.</h2>
@@ -54,6 +67,9 @@ const IndexPage = () => (
     </div>
     <div>
       <Link to="/all-pokemons/">Pokemons</Link>
+    </div>
+    <div>
+      <Link to="/client-fetching/">Dynamic data fetching</Link>
     </div>
   </Layout>
 )
