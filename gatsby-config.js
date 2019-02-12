@@ -5,6 +5,7 @@ module.exports = {
     author: `Peter Larsson`,
   },
   plugins: [
+    'gatsby-plugin-sass',
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
