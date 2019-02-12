@@ -1,5 +1,6 @@
 ---
 title: 'Sweet Pandas Eating Sweets'
+templateKey: 'panda-post'
 date: '2017-08-10'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: 'Pandas and Bananas'
+templateKey: 'panda-post'
 date: '2017-08-21'
 ---
 
