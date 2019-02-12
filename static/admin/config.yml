@@ -13,6 +13,7 @@ collections:
     folder: src/cms_out/pages/blog
     create: true
     fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post"}
       - { name: path, label: Path }
       - { name: date, label: Date, widget: date }
       - { name: title, label: Title }
@@ -23,6 +24,7 @@ collections:
     folder: src/cms_out/pages/games
     create: true
     fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "game-post"}
       - { name: path, label: Path }
       - { name: date, label: Date, widget: date }
       - { name: title, label: Title }
