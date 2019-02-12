@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { Link } from 'gatsby'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import SEO from '../components/seo'
 import PropTypes from 'prop-types'
 
@@ -39,7 +39,7 @@ const result = await graphql(\`
 result.data.allMarkdownRemark.edges.forEach(({ node }) => {
 createPage({
   path: node.fields.slug,
-  component: path.resolve(\`./src/templates/panda-post.js\`),
+  component: path.resolve(\`./src/templates/\${String(node.frontmatter.templateKey)}.js\`),
   context: {
     // Data passed to context is available
     // in page queries as GraphQL variables.

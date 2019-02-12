@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './about-css-modules.module.css'
 
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import SEO from '../components/seo'
 import PropTypes from 'prop-types'
 

@@ -15,6 +15,7 @@
         "allow": ["warn", "error"]
       }
     ],
+    "no-extra-boolean-cast": 0,
     "no-unused-vars": [
       "off",
       {
