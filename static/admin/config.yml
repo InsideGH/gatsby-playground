@@ -16,3 +16,15 @@ collections:
       - { name: date, label: Date, widget: date }
       - { name: title, label: Title }
       - { name: body, label: Body, widget: markdown }
+
+  - name: games 
+    label: Games 
+    folder: games
+    create: true
+    fields: # The fields for each document, usually in front matter
+      - { name: path, label: Path }
+      - { name: date, label: Date, widget: date }
+      - { name: title, label: Title }
+      - { name: body, label: Body, widget: markdown }
+      - { label: Lead, name: Lead, widget: string, optional: true, required: false}
+      - { label: "Align Content", name: "align", widget: "select", options: ["left", "center", "right"]}
