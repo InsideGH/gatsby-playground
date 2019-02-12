@@ -1,6 +1,6 @@
 ---
 templateKey: 'product-page'
-path: /products
+path: /cms/products
 title: Our Coffee
 image: /assets/jumbotron.jpg
 heading: What we offer
